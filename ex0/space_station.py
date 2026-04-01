@@ -15,7 +15,7 @@ class SpaceStation(BaseModel):
     name: str = Field(
                         ...,
                         min_length=1,
-                        max_length=20,
+                        max_length=50,
                         description="Name of the space station")
     crew_size: int = Field(
                         ...,
@@ -36,10 +36,10 @@ class SpaceStation(BaseModel):
                         ...,
                         description="Date of the last maintenance")
     is_operational: bool = Field(
-                        ...,
+                        True,
                         description="Operational status of the space station")
     note: Optional[str] = Field(
-                        True,
+                        None,
                         max_length=200,
                         description="Additional notes about the space station")
 
@@ -49,14 +49,13 @@ def main():
     print("=" * 40)
     try:
         station = SpaceStation(
-            station_id="SS-001",
-            name="Alpha Station",
-            crew_size=10,
+            station_id="ISS001",
+            name="International Space Station",
+            crew_size=6,
             power_level=85.5,
-            oxygen_level=90.0,
+            oxygen_level=92.3,
             last_maintenance_date=datetime(2026, 4, 1),
-            is_operational=True,
-            note="All systems are functioning properly."
+            is_operational=True
         )
         print("Valid station created:")
         print(f"ID: {station.station_id}")
@@ -76,8 +75,8 @@ def main():
     print("\n"+"=" * 40)
     try:
         invalid_station = SpaceStation(
-            station_id="SS-002",
-            name="Beta Station",
+            station_id="ISS002",
+            name="Broken International Space Station",
             crew_size=25,
             power_level=100.0,
             oxygen_level=90.0,
